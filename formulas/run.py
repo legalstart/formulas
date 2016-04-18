@@ -77,7 +77,7 @@ def process_all_rules(rules, data):
 
 
 if __name__ == '__main__':
-    rules = yaml.load(open('./formulas/rules/incorporation.yaml', 'r'))
+    rules = yaml.load(open('./formulas/rules/incorporation.yml', 'r'))
 
     data = json.load(
         open('./formulas_test/rules_inputs/incorporation.json', 'r'))

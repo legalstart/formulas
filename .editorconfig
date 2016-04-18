@@ -13,18 +13,8 @@ trim_trailing_whitespace = true
 indent_size = 4
 max_line_length = 80
 
-[**.js]
-indent_size = 2
-max_line_length = 100
-
-[**.yml]
+[**.{yml,yaml}]
 indent_size = 4
-
-[**.{xml,html}]
-indent_size = 2
-
-[**.scss]
-indent_size = 2
 
 [**.{md,ymd}]
 trim_trailing_whitespace = false
