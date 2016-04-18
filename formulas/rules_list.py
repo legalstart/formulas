@@ -8,7 +8,21 @@ import rules_helpers
 from meta_test.testable_list import TestableList
 
 
+EVAL_CONTEXT_BASE = {
+    k: v
+    for k, v in rules_helpers.__dict__.iteritems()
+    if not k.startswith('__')
+}
+
+
 class RulesList(TestableList):
+
+    __slots__ = ('name', 'initial_vars')
+
+    def __init__(self, name, rules_list, initial_vars):
+        """ Initializes the ``initial_vars`` """
+        super(RulesList, self).__init__(name, rules_list)
+        self.initial_vars = initial_vars
 
     # [TODO] - Make type_caster_name optional
     @staticmethod
@@ -22,8 +36,8 @@ class RulesList(TestableList):
         :returns: output of the formula, of type defined by ``type_caster_name``
         """
         # [TODO] - perf improvement necessary?
-        eval_context = deepcopy(variables)
-        eval_context.update(rules_helpers.__dict__)
+        eval_context = deepcopy(EVAL_CONTEXT_BASE)
+        eval_context.update(variables)
         return_value = eval(formula, eval_context)
 
         # Cast result if possible:
@@ -41,8 +55,8 @@ class RulesList(TestableList):
         """ See above, differences: ``formula`` returns always a `list` and
         ``type_caster_name`` is mapped on the output list.
         """
-        eval_context = deepcopy(variables)
-        eval_context.update(rules_helpers.__dict__)
+        eval_context = deepcopy(EVAL_CONTEXT_BASE)
+        eval_context.update(variables)
         return_list = eval(formula, eval_context)
 
         type_caster = getattr(
@@ -58,17 +72,13 @@ class RulesList(TestableList):
     def process_all_rules(self, data):
         """
         :param rules: list of couples (str) varnames, (dict) containing ``type``
-        and ``formula``.
+        and ``formula`` [TESTED]
         :param data: dict - user data, will get modified.
         """
         for varname, rule in self:
-            # list => varname with .
             if isinstance(rule['type'], list):
-                list_varname, nested_varname = varname.split('.')
-                results = self.process_list_formula(
+                data[varname] = self.process_list_formula(
                         rule['formula'], rule['type'][0], data)
-                for el, result in zip(data[list_varname], results):
-                    el[nested_varname] = result
             else:
                 data[varname] = self.process_formula(
                     rule['formula'], rule['type'], data)

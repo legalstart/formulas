@@ -3,14 +3,12 @@
     {
       "first_name": "Duquon",
       "last_name": "La Joie",
-      "capital": 3000,
-      "birth_date": "02/04/1984"
+      "capital": 3000
     },
     {
       "first_name": "Duquette",
       "last_name": "La Jette",
-      "capital": 1000,
-      "birth_date": "03/12/1980"
+      "capital": 1000
     }
   ]
 }
