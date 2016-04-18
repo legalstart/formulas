@@ -1,1 +1,2 @@
-from lib import holy_shit, class_dec, to_tesst
+from decorators import class_dec, to_tesst
+from ruleset import RuleSet
