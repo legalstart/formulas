@@ -1,0 +1,22 @@
+total_capital:
+  type: int
+  formula: sum([founder['capital'] for founder in founders])
+
+# Use the previous formula. To use for creating an ordering error w/ the prev one
+founders.capital_percentage:
+  type: [int]
+  formula: "[founder['capital'] / total_capital for founder in founders]"
+
+# Try to cast alone
+founders.birth_day:
+  type: [int]
+  formula: "[founder['birth_date'].split('/')[0] for founder in founders]"
+
+# Use a func
+founders.birth_month:
+  type: [str]
+  formula: "[month_of_date(founder['birth_date']) for founder in founders]"
+
+founders.birth_year:
+  type: [int]
+  formula: "[founder['birth_date'].split('/')[2] for founder in founders]"
