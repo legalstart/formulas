@@ -25,7 +25,7 @@ def class_dec(testable_lists):
     def class_decorator(klass):
         test_methods = retrieve_test_methods(klass)
         for testable_list in testable_lists:
-            attrs = {}
+            attrs = {'testable_list': testable_list}
             for m in test_methods:
                 for i, testable_obj in enumerate(testable_list):
                     decorated_m = currying(testable_obj)(m)
