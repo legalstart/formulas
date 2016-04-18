@@ -1,4 +1,3 @@
-from unittest import TestCase
 from sys import modules
 import inspect
 
