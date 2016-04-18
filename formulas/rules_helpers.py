@@ -6,6 +6,7 @@ _MONTHS_LIST = [
     'July', 'August', 'September', 'October', 'November', 'December'
 ]
 
+
 def month_of_date(date_str):
     """
     >>> month_of_date('12/12/2012')
