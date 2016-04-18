@@ -14,3 +14,7 @@ class TestFormula(TestCase):
     @to_tesst
     def check_formula(self, formula):
         self.assertEqual(True, formula[0] not in formula[1][1])
+
+    @to_tesst
+    def check_nb_input(self, formula):
+        self.assertEqual(True, len(formula[1][1]) > 0)

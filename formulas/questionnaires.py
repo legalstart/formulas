@@ -6,5 +6,5 @@ class Questionnaire(object):
         self.name = name
         self.formulas = formulas
 
-q1 = Questionnaire('q1', (formula1, formula2))
+q1 = Questionnaire('q1', (formula1, formula2, formula4))
 q2 = Questionnaire('q2', (formula2, formula3))

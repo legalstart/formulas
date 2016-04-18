@@ -4,3 +4,4 @@
 formula1 = ('B',(lambda a: ['b1', 'b2'][a], 'A'))
 formula2 = ('X', (lambda x, y: x + y, ('x', 'y')))
 formula3 = ('X', (lambda x, y: x + y, ('X', 'y')))
+formula4 = ('X', (lambda x, y: x + y, ()))

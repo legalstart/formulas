@@ -44,7 +44,7 @@ def class_dec(questionnaires):
                 for i, f in enumerate(q.formulas):
                     decorated_m = currying(f)(m)
                     decorated_m.__test__ = 1
-                    test_name = "test_formula_%d" % (i + 1)
+                    test_name = "test_%s_on_formula_%d" % (m.__name__, i + 1)
                     attrs[test_name] = decorated_m
 
             q_test_klass = type("test_%s" % q.name, (klass,), attrs)
