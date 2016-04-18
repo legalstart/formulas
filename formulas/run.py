@@ -60,10 +60,11 @@ def process_list_formula(formula, type_caster_name, variables):
 
 def process_all_rules(rules, data):
     """
-    :param rules: list of rules containing ``type`` and ``formula``.
+    :param rules: list of couples (str) varnames, (dict) containing ``type``
+    and ``formula``.
     :param data: dict - user data, will get modified.
     """
-    for varname, rule in rules.iteritems():
+    for varname, rule in rules:
         # list => varname with .
         if isinstance(rule['type'], list):
             list_varname, nested_varname = varname.split('.')
@@ -81,6 +82,6 @@ if __name__ == '__main__':
     data = json.load(
         open('./formulas_test/rules_inputs/incorporation.json', 'r'))
 
-    for ruleset_name, rules in RULESETS.iteritems():
-        print '--------------- %s ----------------' % ruleset_name
-        print process_all_rules(rules, data)
+    for ruleset in RULESETS:
+        print '--------------- %s ----------------' % ruleset.name
+        print process_all_rules(ruleset.rules, data)

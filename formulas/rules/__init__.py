@@ -61,7 +61,7 @@ def extract_rules(filepath):
 RULESETS = [
     RuleSet(
         name=filename[:len(filename) - 4],  # "xxx.yml"
-        rules=extract_rules(os.path.join(_RULES_DIR, filename))
+        rules=extract_rules(os.path.join(_RULES_DIR, filename)).items()
     )
 
     for filename in os.listdir(_RULES_DIR)

@@ -2,7 +2,7 @@ class RuleSet(object):
 
     __slots__ = (
         'name',  # str
-        'rules'  # ordered iterable
+        'rules'  # list or tuple
     )
 
     def __init__(self, name, rules):
