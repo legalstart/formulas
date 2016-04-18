@@ -1,1 +1,1 @@
-Write business rules in Yaml+Python and get propoer testing of it.
+Write business rules in Yaml+Python and get proper testing of it.
