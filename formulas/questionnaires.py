@@ -1,9 +1,9 @@
 #TODO a virer
-from test_lib import RuleSet
+from meta_test import TestableList
 from formulas import *
 
 
-class Questionnaire(RuleSet):
+class Questionnaire(TestableList):
     pass
 
 q1 = Questionnaire('q1', (formula1, formula2, formula4))

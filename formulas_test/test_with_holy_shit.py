@@ -1,5 +1,5 @@
 from unittest import TestCase
-from test_lib import class_dec, to_tesst
+from meta_test import class_dec, to_tesst
 from formulas.rules import RULESETS
 
 # new method using small TestCase hack

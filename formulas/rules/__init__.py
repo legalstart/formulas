@@ -2,7 +2,7 @@ import os
 import yaml
 from collections import OrderedDict
 
-from test_lib import RuleSet
+from meta_test import TestableList
 
 
 _RULES_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -59,11 +59,11 @@ def extract_rules(filepath):
 
 
 RULESETS = [
-    RuleSet(
+    TestableList(
         name=filename[:len(filename) - 4],  # "xxx.yml"
         rules=extract_rules(os.path.join(_RULES_DIR, filename)).items()
     )
 
     for filename in os.listdir(_RULES_DIR)
     if filename.endswith('.yml')
-]
+    ]
