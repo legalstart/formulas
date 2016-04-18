@@ -1,1 +1,1 @@
-from lib import holy_shit
+from lib import holy_shit, class_dec, to_tesst
