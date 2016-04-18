@@ -21,7 +21,7 @@ def retrieve_test_methods(klass):
     return [m[1] for m in methods if hasattr(m[1], '__to_test__')]
 
 
-def class_dec(*rulesets):
+def class_dec(rulesets):
     def class_decorator(klass):
         test_methods = retrieve_test_methods(klass)
         for ruleset in rulesets:
