@@ -3,13 +3,14 @@
 # [TODO] - use an ast parser instead of raw `eval`
 
 import json
-import yaml
 import __builtin__
 from copy import deepcopy
 
 # The module that contains helper functions
 # Used for evaluating formulas and casting formulas results
 import helpers
+
+from rules import RULESETS
 
 
 # [TODO] - Make type_caster_name optional
@@ -60,7 +61,7 @@ def process_list_formula(formula, type_caster_name, variables):
 def process_all_rules(rules, data):
     """
     :param rules: list of rules containing ``type`` and ``formula``.
-    :param data: dict - user data.
+    :param data: dict - user data, will get modified.
     """
     for varname, rule in rules.iteritems():
         # list => varname with .
@@ -77,9 +78,9 @@ def process_all_rules(rules, data):
 
 
 if __name__ == '__main__':
-    rules = yaml.load(open('./formulas/rules/incorporation.yml', 'r'))
-
     data = json.load(
         open('./formulas_test/rules_inputs/incorporation.json', 'r'))
 
-    print process_all_rules(rules, data)
+    for ruleset_name, rules in RULESETS.iteritems():
+        print '--------------- %s ----------------' % ruleset_name
+        print process_all_rules(rules, data)
