@@ -15,13 +15,25 @@ EVAL_CONTEXT_BASE = {
 }
 
 
+class Rule(tuple):
+    def __unicode__(self):
+        return unicode(self[0])
+
+    def __str__(self):
+        return str(self[0])
+
+
 class RulesList(TestableList):
 
     __slots__ = ('name', 'initial_vars')
 
     def __init__(self, name, rules_list, initial_vars):
         """ Initializes the ``initial_vars`` """
-        super(RulesList, self).__init__(name, rules_list)
+        rule_objects_list = [
+            Rule(_)
+            for _ in rules_list
+        ]
+        super(RulesList, self).__init__(name, rule_objects_list)
         self.initial_vars = initial_vars
 
     # [TODO] - Make type_caster_name optional
