@@ -1,4 +1,3 @@
-from unittest import TestCase
 from sys import modules
 import inspect
 
@@ -36,4 +35,5 @@ def class_dec(testable_lists):
             tl_test_klass = type("test_%s" % testable_list.name, (klass,), attrs)
             setattr(modules[klass.__module__], tl_test_klass.__name__,
                     tl_test_klass)
+        return klass
     return class_decorator
