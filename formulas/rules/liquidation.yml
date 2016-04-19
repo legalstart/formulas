@@ -1,14 +1,14 @@
 !!omap:
     # Try to cast alone
-    - president.birth_day:
+    - president__birth_day:
         type: int
         formula: "president__birth_date.split('/')[0]"
 
     # Use of a func
-    - president.birth_month:
+    - president__birth_month:
         type: str
         formula: "month_of_date(president__birth_date)"
 
-    - president.birth_year:
+    - president__birth_year:
         type: int
         formula: "president__birth_date.split('/')[2]"

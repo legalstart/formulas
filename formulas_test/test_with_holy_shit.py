@@ -11,18 +11,21 @@ from formulas.rules_list import EVAL_CONTEXT_BASE
 class TestFormula(TestCase):
 
     @to_tesst
-    def check0_syntax(self, (varname, rule)):
-        self.assertTrue('formula' in rule, msg="Rule doesn't contain a formula")
-        self.assertTrue('type' in rule, msg="Rule doesn't contain a type")
+    def check0_syntax(self, rule):
+        self.assertEqual(len(rule), 2)
+        self.assertTrue('formula' in rule[1],
+                        msg="Rule doesn't contain a formula")
+        self.assertTrue('type' in rule[1],
+                        msg="Rule doesn't contain a type")
 
     @to_tesst
-    def check1_inputs_exist(self, (varname, rules)):
+    def check1_inputs_exist(self, rule):
         """ Launched on every varname in order """
-        formula = rules['formula']
+        formula = rule[1]['formula']
         formula_input_vars = undefined_vars(formula)
 
         # All the availabe vars: the RulesSet initial vars augmented with
-        # previous rules outputs + helpers
+        # previous rule outputs + helpers
         if not hasattr(self, '_all_vars'):
             self._all_vars = self.testable_list.initial_vars
         available_vars = (
@@ -34,4 +37,4 @@ class TestFormula(TestCase):
                         msg=("Formula expects vars that don't exist: %s"
                              % ', '.join(formula_input_vars - available_vars)))
 
-        self._all_vars.append(varname)
+        self._all_vars.append(rule[0])
