@@ -10,6 +10,10 @@ from formulas.rules_list import EVAL_CONTEXT_BASE
 @class_dec(RULESETS)
 class TestFormula(TestCase):
 
+    def __init__(self, *args, **kwargs):
+        self._all_vars = self.testable_list.initial_vars
+        super(TestFormula, self).__init__(*args, **kwargs)
+
     @to_tesst
     def check0_syntax(self, (varname, rule)):
         self.assertTrue('formula' in rule, msg="Rule doesn't contain a formula")
@@ -23,8 +27,6 @@ class TestFormula(TestCase):
 
         # All the availabe vars: the RulesSet initial vars augmented with
         # previous rules outputs + helpers
-        if not hasattr(self, '_all_vars'):
-            self._all_vars = self.testable_list.initial_vars
         available_vars = (
             set(self._all_vars) | set(dir(__builtin__)) |
             set(EVAL_CONTEXT_BASE.iterkeys()) | {'_'}
