@@ -18,8 +18,8 @@ class TestFormula(TestCase):
         self._all_vars = self.testable_list.initial_vars
         super(TestFormula, self).__init__(*args, **kwargs)
 
-    @to_tesst
-    def check0_syntax(self, rule):
+    @to_tesst('rule syntax is well-formed')
+    def check_syntax(self, rule):
         """ rule is a 2ple like ``(varname, {'type': ..., 'formula': ...})``
         """
         self.assertEqual(len(rule), 2)
@@ -28,8 +28,8 @@ class TestFormula(TestCase):
         self.assertTrue('type' in rule[1],
                         msg="Rule doesn't contain a type")
 
-    @to_tesst
-    def check1_inputs_exist(self, rule):
+    @to_tesst('all formula inputs already exist')
+    def check_inputs_exist(self, rule):
         """ In the rule formula, are the expected inputs really available?
         Launched on every varname in the right order.
         """
