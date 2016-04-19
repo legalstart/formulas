@@ -6,6 +6,10 @@ from formulas.rules import RULESETS
 from formulas.rules_list import EVAL_CONTEXT_BASE
 
 
+_BASE_VARS_SET = \
+    set(dir(__builtin__)) | set(EVAL_CONTEXT_BASE.iterkeys()) | {'_'}
+
+
 # new method using small TestCase hack
 @class_dec(RULESETS)
 class TestFormula(TestCase):
@@ -16,6 +20,8 @@ class TestFormula(TestCase):
 
     @to_tesst
     def check0_syntax(self, rule):
+        """ rule is a 2ple like ``(varname, {'type': ..., 'formula': ...})``
+        """
         self.assertEqual(len(rule), 2)
         self.assertTrue('formula' in rule[1],
                         msg="Rule doesn't contain a formula")
@@ -24,18 +30,18 @@ class TestFormula(TestCase):
 
     @to_tesst
     def check1_inputs_exist(self, rule):
-        """ Launched on every varname in order """
+        """ In the rule formula, are the expected inputs really available?
+        Launched on every varname in the right order.
+        """
         formula = rule[1]['formula']
         formula_input_vars = undefined_vars(formula)
 
-        # All the availabe vars: the RulesSet initial vars augmented with
-        available_vars = (
-            set(self._all_vars) | set(dir(__builtin__)) |
-            set(EVAL_CONTEXT_BASE.iterkeys()) | {'_'}
-        )
+        # All the availabe varnames: augmented w/ previously calculated varnames
+        available_vars = set(self._all_vars) | _BASE_VARS_SET
 
         self.assertTrue(formula_input_vars.issubset(available_vars),
                         msg=("Formula expects vars that don't exist: %s"
                              % ', '.join(formula_input_vars - available_vars)))
 
+        # Add the calculated varname
         self._all_vars.append(rule[0])
