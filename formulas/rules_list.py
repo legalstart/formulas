@@ -5,7 +5,7 @@ from copy import deepcopy
 # Used for evaluating formulas and casting formulas results
 import rules_helpers
 
-from meta_test.testable_list import TestableList
+from param_test.testable_list import TestableList
 
 
 EVAL_CONTEXT_BASE = {

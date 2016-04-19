@@ -1,6 +1,6 @@
 import __builtin__
 from unittest import TestCase
-from meta_test import class_dec, to_tesst
+from param_test import class_dec, to_tesst
 from formulas.lib import undefined_vars
 from formulas.rules import RULESETS
 from formulas.rules_list import EVAL_CONTEXT_BASE
