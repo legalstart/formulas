@@ -2,20 +2,6 @@ from sys import modules
 import inspect
 
 
-def currying(elem):
-    """
-    Decorator for currying  a function.
-    f: (x, y) ->f(x, y) is transformed into g: x->f(x, elem)
-    :param elem:
-    :return:
-    """
-    def func_decorator(func):
-        def func_wrapper(self):
-            return func(self, elem)
-        return func_wrapper
-    return func_decorator
-
-
 def to_tesst(desc):
     """
     decorator for methods needing to be parametrized
@@ -56,7 +42,7 @@ def class_dec(testable_lists):
             attrs = {'testable_list': testable_list}
             for m in test_methods:
                 for testable_obj in testable_list:
-                    decorated_m = currying(testable_obj)(m)
+                    decorated_m = lambda x, m=m: m(x, testable_obj)
                     decorated_m.__test__ = 1
                     test_name = m.__test_name__.replace(
                         "<testable_obj>", str(testable_obj))
